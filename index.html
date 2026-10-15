@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGPA Calc — Semester Result Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>SGPA Calc</h1>
+      <p class="tagline">Semester result calculator with a target-grade planner. Works fully offline.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ============ Controls ============ -->
+    <section class="card controls">
+      <div class="control-row">
+        <label for="inputMode">Enter per subject:</label>
+        <select id="inputMode">
+          <option value="marks">Marks (0–100)</option>
+          <option value="grade">Grade letter (O / A+ / A / …)</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="scalePreset">Marks → grade scale:</label>
+        <select id="scalePreset">
+          <option value="standard40">Standard 10-point (pass at 40)</option>
+          <option value="standard35">Standard 10-point (pass at 35)</option>
+        </select>
+        <button id="showScaleBtn" type="button" class="ghost-btn">View scale</button>
+      </div>
+      <div class="control-row">
+        <button id="addSubjectBtn" type="button">+ Add subject</button>
+        <button id="clearBtn" type="button" class="ghost-btn">Clear all</button>
+        <button id="loadSampleBtn" type="button" class="ghost-btn">Load sample</button>
+      </div>
+      <p id="scaleTable" class="scale-table" hidden></p>
+    </section>
+
+    <!-- ============ Subject rows ============ -->
+    <section class="card">
+      <h2>Subjects</h2>
+      <div id="subjectList" class="subject-list"></div>
+
+      <div class="result">
+        <div class="result-label">Your SGPA</div>
+        <div id="sgpaValue" class="sgpa-value">—</div>
+        <div id="sgpaDetail" class="result-detail"></div>
+      </div>
+    </section>
+
+    <!-- ============ Target planner ============ -->
+    <section class="card">
+      <h2>Target SGPA planner</h2>
+      <p class="muted">
+        Enter what is still ahead this semester and the SGPA you want.
+        The planner tells you the <strong>average grade point</strong> you need
+        in the remaining credits to get there.
+      </p>
+      <div class="planner-grid">
+        <div>
+          <label for="targetSgpa">Target SGPA</label>
+          <input id="targetSgpa" type="number" min="0" max="10" step="0.01" value="7.5" />
+        </div>
+        <div>
+          <label for="remainingCredits">Remaining credits</label>
+          <input id="remainingCredits" type="number" min="0" step="0.5" value="12" />
+        </div>
+      </div>
+      <button id="planBtn" type="button">What do I need?</button>
+      <div id="planResult" class="plan-result" hidden></div>
+    </section>
+
+    <footer class="muted footer">
+      SGPA = Σ(credits × grade point) ÷ Σ(credits), on the standard Indian 10-point scale.
+      Grade scales differ between universities — check yours; your last entries are saved on this device.
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
